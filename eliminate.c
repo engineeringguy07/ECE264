@@ -23,14 +23,16 @@ void eliminate(int n, int k)
   // expressions like a[i]
 	
   // initialize all elements
-
+int ele_num = 0;
+	
 
   
   // counting to k,
   // mark the eliminated element
   // print the index of the marked element
   // repeat until only one element is unmarked
-
+for (n < 2; n--)
+	
 
 
 
