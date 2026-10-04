@@ -1,344 +1,182 @@
-# Homework 2: Who Gets the Cake
+# Homework 6: Merge Sort
 
+    /\     _        _     /\
+    || ___( \      / )___ ||
+    ||(___)\ \    / /(___)||
+    \/      \_)()(_/      \/
 
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠉⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢃⣾⣆⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⡟⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⢾⡏⢹⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⢡⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣤⠀⠀⠀⠚⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⣠⡘⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⠁⣞⢻⣦⡙⣿⣿⣿⣿⣿⡟⠹⣿⣿⡇⢰⣶⣴⣶⡇⣿⣿⡿⠙⣿⣿⣿⡿⡏⣼⡟⣷⠸⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣄⠚⠂⠙⢃⣾⣿⣿⣿⣿⢡⣦⠹⣿⣷⡈⠿⢸⣿⠐⣿⣿⢃⣷⡈⢿⣿⣷⡄⠻⠁⠙⡡⠿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⡟⢉⠀⠀⣀⡀⣸⣿⣿⣿⠏⣼⡟⣷⡌⢛⡁⢀⠸⣿⡇⣙⡃⢸⡏⢿⣆⠻⣿⡷⠀⣀⣀⣀⡄⢹⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣧⠸⣿⠿⣿⠁⢛⣫⣭⣴⣆⠙⠃⠉⠃⢼⣿⠀⣇⠹⠃⢹⡷⠌⠛⠈⠃⠴⣬⣅⠘⡟⣿⣿⡇⣾⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⠆⢹⠄⣿⠀⣿⣿⣿⡿⢉⣀⣀⣀⣤⢸⣿⣷⣤⡤⣶⣿⠃⣤⠤⣤⣴⠆⡙⢿⣆⢀⢿⣿⡇⡙⠿⣿⣿⣿⣿⣿
-⣿⣿⣿⢃⣴⢸⣷⡈⡀⢿⢹⣿⣧⠘⡟⣿⣿⡇⣾⣿⣿⡟⣸⡏⣿⣇⢻⡇⣿⣟⢸⣿⡌⢿⡆⢸⣿⣇⢻⣷⣌⠻⣿⣿⣿
-⣿⣿⠇⣾⣿⣈⠛⣛⣡⣼⢸⣿⣿⣇⠀⢻⣿⡇⣿⣿⣿⣇⢿⣧⡙⢿⡆⣷⢸⣿⢸⣿⣿⣸⣆⣙⣛⣫⣴⠸⣿⡇⢹⣿⣿
-⣿⣿⢸⣿⣿⣿⣎⠻⣿⣿⣦⣍⡛⣿⠀⡌⢻⣷⠸⣿⣿⣿⠆⣿⣿⣼⡇⢻⣾⣿⠆⣿⣿⣿⣿⣿⣿⠿⢛⣀⣿⠇⣼⣿⣿
-⣿⣿⣦⠉⣍⢻⣿⣧⡙⠿⠿⠿⠇⣾⡤⣙⣛⣡⣼⣿⣿⣧⣾⣿⣿⣿⣿⣤⣭⣭⣴⠿⠿⢛⣛⣥⣶⣾⣿⡿⢋⠐⣿⣿⣿
-⣿⣿⣿⡇⣿⠸⣿⣿⠟⣈⠻⣿⣿⣿⣿⣦⣝⠻⠿⠿⣛⣩⣙⣛⠿⠿⠿⠿⢟⣻⣿⣿⣿⣿⣿⣿⣿⣿⡁⣶⣗⠀⣿⣿⣿
-⣿⣿⣿⠇⣿⣦⡙⣃⣾⣿⡇⢿⡟⣩⣴⣶⣭⣝⠻⣿⣿⣿⣿⠿⠿⠛⣁⡙⢿⣿⣿⠏⣵⣶⣬⣙⣛⠛⠡⠚⣁⡄⣹⣿⣿
-⣿⣿⡇⣶⣶⣬⣙⠻⢿⣿⣷⠘⣃⣾⣿⣿⣿⣿⣷⡘⢿⣷⣶⡞⣡⣾⣿⣿⣦⣙⣡⣾⣿⡿⠟⣛⣡⣴⣾⣿⡿⢃⣿⣿⣿
-⣿⡟⢸⣿⣿⣿⠿⣿⣶⣮⣭⣙⣛⡻⠿⠿⢿⣿⣿⣿⣦⣍⣩⣴⣿⣿⣿⠿⠟⣛⣫⣭⣴⣾⣿⣿⣿⣿⠿⠿⢃⠀⢿⣿⣿
-⡿⢃⣌⡉⣡⣶⣶⣦⡙⢿⣿⣿⣿⣽⣭⣥⣀⡲⠦⠉⡉⠉⠉⠉⠩⠴⠶⠾⠟⣻⣿⣿⣿⡿⢋⣙⣛⣡⣾⣿⣿⢸⣦⡘⣿
-⠀⢸⣿⣷⡘⢿⣿⣿⣿⣦⡙⢛⣋⣭⣭⣍⣛⠻⢿⣿⣿⣿⡿⢂⣤⣐⠲⢶⣿⣿⣿⣿⠟⣠⣿⣿⣿⣿⣿⡿⢋⣼⣿⡇⢸
-⣷⡘⣿⣿⣿⣦⣝⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣌⡛⢛⣡⣿⣿⣿⣷⣶⣬⣭⣭⣴⣾⣿⣿⣿⠿⢛⣡⣾⣿⣿⡿⢁⣾
-⣿⣷⣮⣙⠿⣿⣿⣿⣶⣬⣍⣛⡻⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⢛⣋⣭⣴⣾⣿⣿⡿⠟⣩⣴⣿⣿
-⣿⣿⣿⣿⣿⣶⣬⣍⣛⠻⠿⠿⣿⣿⣿⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣾⣿⣿⣿⡿⠿⠟⣛⣩⣤⣾⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣦⣭⣭⣭⣭⣙⣛⣛⣛⣛⣛⣛⣛⣩⣭⣭⣭⣴⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀
+## Goals
+
+In HW5, you wrote several routines to sort Student records that you read in from a
+file. Your job in that assignment was to write comparison functions to compare
+Students by different fields in their records. However, you used the C
+standard library's built-in `qsort` function to perform the actual sort. In
+this assignment, you will write your own sort function.
+
+In other words, compared with HW5, the only difference in HW6 is that you'll write your own function for sorting.
+All other parts are the same. In the case that you were unable to complete your comparison functions for HW5, 
+you can still work on HW6 using the *pre-built* object file `student.o` we provided.
+See the section **Testing your code** for details.
+
+You will learn:
+
+* Recursion principles
+* "Divide-and-conquer" recursion
+* Merge sort
 
 ## Due Date
 
-Due: September 7, 2026 at 9pm
+Due: October 5, 2026 at 9pm
 
-Extension: September 9, 2026 at 9pm
-
-##  Goals 
-
-In this homework, you will get familiar with arrays.
+Extension: October 7, 2026 at 9pm
 
 ## Background
 
-Let's start with the introduction of this problem.
-Imagine that there is a piece of cake and several people want it. They decide who can have it
-by playing a game: They form a circle and choose an integer k greater
-than one. They count 1, 2, 3, ..., k. The k-th person is eliminated.
-They keep counting until only one person is left. This person who is left gets the
-cake.
+### 1. Recursion
 
-Please notice that there are different definitions of this
-problem. *Your solution must follow the definition here.*  More
-precisely, this is how the method works: There are n people (n is an integer),
-represented by n elements in an array. The elements are counted as
-1, 2, 3, ... When the value k is counted, this element is removed in
-future counting and the next element starts as 1 again. When reaching
-the end of the array, the counting *wrap around* to the beginning of
-the array (skipping the elements that have already been eliminated).
-Please notice that in C arrays, indexes *always* start at zero but in
-this problem counting starts at one. Both n and k have to be greater
-than one. *It is possible that k is greater than n.*
-
-## Array quick review
-
-Arrays are sequences of data types laid out next to each other in memory. C treats
-array data types specially, allowing you to access them by *indexing* from a base expression:
+In a superficial sense, recursion is what happens whenever a function `f` calls itself, as in the "standard" factorial example:
 
 ```
-int a[10]; //10 integers next to each other
-a[0] = 5; //access the first integer
-a[9] = 10; //access the 10th integer
+int factorial(int n) {
+  if (n == 0) {return 1;}
+  else {return n * factorial(n - 1);}
+}
 ```
 
-Remember that the first element of an array is at index `0`, and the last element
-of an array is at index `size - 1`.
+It is better to think of recursion as a *technique* for solving problems. Many problems can be thought of using the following pattern:
 
-Note that if you don't know the size of the array ahead of time, you can
-*dynamically allocate* the array:
+1. Break the problem up into "smaller" version(s) of the same problem.
+2. Solve the smaller problem(s) by calling the same function (we call this the 
+   *inductive case*)
+3. Use the solutions to the smaller problem(s) to solve the original problem.
+
+This seems like a process that doesn't end: to solve a big problem, we break
+it up into smaller versions of the problem -- but then we have to solve the
+smaller problem, which isn't any different! The key is that you can *repeat*
+this process, solving the smaller problems in the same way. At each step, you
+get smaller and smaller problems. Eventually, the problem is small enough that
+getting the answer is trivial. We call this the *base case*.
+
+We can see this in the `factorial` example: rather than computing `factorial`
+of `n`, we realize that `n!` is just `n * (n-1)!` (Step 1: break the problem
+up into a smaller version of the same problem) -- so we can call `factorial(n - 1)`
+(Step 2: solve the smaller problem by calling the same function). We can 
+then multiply this by `n` to find `factorial(n)` (Step 3: use the solution of
+the smaller problem to solve the original problem). We also see that the *base
+case* is simple: we already know what `0!` is, so there is no need to "break
+it up" into a smaller problem -- we can just return 1.
+
+> Note: you could also write factorial with a loop, and the loop version would
+probably be faster, so you might wonder why we need recursion. The code you
+will write in this assignment is a case where recursion is basically the only
+way to write it.
+
+**Induction:** One way to think about how to correctly write a recursive function is to think *inductively*: We can *assume* that the recursive function already works, but
+only if the function is called on a smaller problem than what we're solving.
+We can then write the recursive function assuming that it already works. The
+only thing we have to make sure we do is write correct *base cases* -- we need
+to make sure that for the smallest versions of the function, we compute the
+correct answer. (This sounds circular, but it works for the same reason that
+inductive proofs work)
+
+### 2. Divide-and-conquer recursion
+
+A very common pattern for recursive problems is *divide-and-conquer*
+recursion: to solve a problem on *n* pieces of data (e.g., an array of length
+*n*), we break the input up into two pieces, each with *n/2* pieces of data
+(e.g., two arrays, each with half the elements), call the recursive function
+on these smaller pieces, then write some code to combine the results from
+those two functions into the final answer. The base case for this style of
+function is what to do when you have only 1 element.
+
+Consider a toy example where we want to sum up all the values in an input
+array with n elements. Here, if we divide the array in two and sum those two
+sub-arrays, we can add the results to get the sum of the whole array. The base
+case is that the sum of an array with just one element is the value of that
+element:
 
 ```
-int * a = malloc(20 * sizeof(* a)); //allocate an array of 20 integers
-a[4] = 20; //access the fifth integer
+int sum(int * arr, int nels) {
+  if (nels = 1) {return arr[0];}
+  
+  int sum1 = sum(arr, nels/2); // calculating the sum of the first half of array
+  int sum2 = sum(&arr[nels/2], (nels + 1)/2); // calculating the sum of the second half of array
+  
+  return sum1 + sum2;
+}
 ```
 
-Do not worry if the syntax of the first line looks mysterious. We will explain it
-in detail when we discuss pointers and memory allocation. For now, just rely on
-this making an array of 20 integers!
+> Note The `(nels + 1)/2` stuff is just a fancy way of dealing with arrays that have
+an odd number of elements, where sum2 works over a slightly larger array than
+sum1. In integer division, `nels/2` is like computing `floor(n/2)`, and `(nels + 1)/2` is like computing `ceiling(n/2)`. More generally, to compute
+`ceiling(a/b)` you can do integer division: `(a + b - 1)/b`.
 
-### Examples
-* The following is an example when the array has 6 elements (n is 6) and
-k is 3. The eliminated elements in each round are mared by `X`.  The
-elements eliminated earlier are marked by `Y`.
+### 3. Merge sort
 
+Your task in this programming assignment is to write a *merge sort*. Merge
+sort is an application of divide and conquer recursion to sort an array. The
+heart of merge sort is the `merge` operation, which combines two *already
+sorted* arrays to produce a new sorted array. To merge two sorted arrays,
+imagine you have two cursors, which start at the beginnings of the two arrays.
+Look at the two elements pointed to by the cursor: add whichever element is
+smaller to the output array, then move that cursor forward by 1 element. (If
+one of the cursors is already at the end of its array, the other cursor always
+"wins.")
 
-array index | 0 | 1 | 2 | 3 | 4 | 5 
-------------|---|---|---|---|---|---
-count       | 1 | 2 | X | 1 | 2 | X 
+This `merge` operation gives us a way of combining the solutions of two
+smaller problems to solve the larger problem of sorting an array:
 
+1. Divide the array into two pieces
+2. Sort the two pieces by recursively calling the same function
+3. Use `merge` to merge the two resulting sorted pieces
 
-array index | 0 | 1 | 2 | 3 | 4 | 5 
-------------|---|---|---|---|---|---
-count       | 1 | 2 | Y | X | 1 | Y 
-
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 
-------------|---|---|---|---|---|---
-count       | 2 | X | Y | Y | 1 | Y 
-
-array index | 0 | 1 | 2 | 3 | 4 | 5
-------------|---|---|---|---|---|---
-count       | 2 | Y | Y | Y | X | Y
-
-The element of index 0 is left.
-
-* This is the second example. The array has 4 elements (n is 4) and k is 6. This is an example where k is greater than n.
-
-array index | 0 | 1 | 2 | 3 
-------------|---|---|---|---
-count       | 1 | 2 | 3 | 4 
-
-array index | 0 | 1 | 2 | 3 
-------------|---|---|---|---
-count       | 5 | X | 1 | 2 
-
-array index | 0 | 1 | 2 | 3 
-------------|---|---|---|---
-count       | 3 | Y | 4 | 5 
-
-array index | 0 | 1 | 2 | 3 
-------------|---|---|---|---
-count       | X | Y | 1 | 2 
-
-array index | 0 | 1 | 2 | 3 
-------------|---|---|---|---
-count       | Y | Y | 3 | 4 
-
-array index | 0 | 1 | 2 | 3 
-------------|---|---|---|---
-count       | Y | Y | 5 | X 
-
-The element of index 2 is left.
-
-* This is the third example. The array has 25 elements (n is 25) and k is 7.
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | 1 | 2 | 3 | 4 | 5 | 6 | X | 1 | 2 | 3 | 4  | 5  | 6  | X  |  1 | 2  |  3 |  4 | 5  | 6  | X  |  1 | 2  |  3 |  4 
-
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | 5 | 6 | X | 1 | 2 | 3 | Y | 4 | 5 | 6 | X  |  1 | 2  | Y  |  3 | 4  | 5  | 6  |  X |  1 | Y  |  2 | 3  | 4  |  5
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | 6 | X | Y | 1 | 2 | 3 | Y | 4 | 5 | 6 | Y  | X  | 1  | Y  | 2  | 3  | 4  | 5  |  Y |  6 | Y  |  X | 1  | 2  |  3
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | 4 | Y | Y | 5 | 6 | X | Y | 1 | 2 | 3 | Y  | Y  | 4  | Y  | 5  | 6  | X  | 1  | Y  |  2 | Y  |  Y | 3  | 4  |  5
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | 6 | Y | Y | X | 1 | Y | Y | 2 | 3 | 4 | Y  | Y  | 5  | Y  | 6  | X  | Y  | 1  | Y  |  2 | Y  |  Y | 3  | 4  |  5
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | 6 | Y | Y | Y | X | Y | Y | 1 | 2 | 3 | Y  | Y  | 4  | Y  | 5  | Y  | Y  | 6  | Y  | X  | Y  |  Y | 1  | 2  |  3
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | 4 | Y | Y | Y | Y | Y | Y | 5 | 6 | X | Y  | Y  | 1  | Y  | 2  | Y  | Y  | 3  | Y  | Y  | Y  |  Y | 4  | 5  |  6
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | X | Y | Y | Y | Y | Y | Y | 1 | 2 | Y | Y  | Y  | 3  | Y  | 4  | Y  | Y  | 5  | Y  | Y  | Y  |  Y | 6  | X  |  1
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | 2 | 3 | Y | Y  | Y  | 4  | Y  | 5  | Y  | Y  | 6  | Y  | Y  | Y  |  Y | X  | Y  |  1
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | 2 | 3 | Y | Y  | Y  | 4  | Y  | 5  | Y  | Y  | 6  | Y  | Y  | Y  |  Y | Y  | Y  |  X
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | 1 | 2 | Y | Y  | Y  | 3  | Y  | 4  | Y  | Y  | 5  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | 6 | X | Y | Y  | Y  | 1  | Y  | 2  | Y  | Y  | 3  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | 4 | Y | Y | Y  | Y  | 5  | Y  | 6  | Y  | Y  | X  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | 1 | Y | Y | Y  | Y  | 2  | Y  | 3  | Y  | Y  | Y  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | 4 | Y | Y | Y  | Y  | 5  | Y  | 6  | Y  | Y  | Y  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | X | Y | Y | Y  | Y  | 1  | Y  | 2  | Y  | Y  | Y  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y  | Y  | 3  | Y  | 4  | Y  | Y  | Y  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y  | Y  | 5  | Y  | 6  | Y  | Y  | Y  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-array index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 
-------------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----
-count       | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y  | Y  | X  | Y  | 6  | Y  | Y  | Y  | Y  | Y  | Y  |  Y | Y  | Y  |  Y
-
-The element of index 14 is left.
-
-The table uses `X` and `Y` for clarity.  Your program should use only `X`.
-
-
+So what should the *base case* be? How do we make sure we don't keep sorting
+smaller and smaller arrays? Note something simple: an array with only one
+element is already sorted!
 
 ## What do you need to do?
 
-Write the `eliminate` function in `eliminate.c` to print the index of the eliminated elements *in order*.
+You will need to only modify and submit ONE file: `msort.c`, providing new
+definitions of two functions: `merge` and `msort`.
 
-In the first example (n=6, k=3), the output is
-```
-2
-5
-3
-1
-4
-0
-```
+`msort` is the function for merge sort.
 
-In the second example (n=4, k=6), the output is
+The signature of `msort` is:
 
-```
-1
-0
-3
-2
-```
+`void msort(Student * base, int nel, int (*compar)(const void *, const void *))`
 
-In the third example (n=25, k=7), the output is
+Where `compar` is a pointer to a comparison function (you can/should reuse your comparison functions from HW5).
 
-```
-6
-13
-20
-2
-10
-18
-1
-11
-21
-5
-16
-3
-15
-4
-19
-9
-0
-23
-22
-24
-8
-17
-7
-12
-14
-```
+As explained above, the heart of merge sort is a `merge` function, which you will also have to write. The signature of `merge` is:
 
-The function is called `eliminate`, not `select` because `select` is a
-C function for communication. If you want to know the definition of
-the `select` function, search `Linux manual select`.
+`Student * merge(Student * base1, int nel1, Student * base2, int nel2, int (*compar)(const void *, const void *))`
 
-**Testing:** You are given the expected output for the three examples discussed above.
-Feel free to create more to test your program.
+Where `merge` returns a *newly allocated* array of `Student`s that is the result of merging the arrays `base1` and `base2`.
 
-In the provided Makefile, you will use the `diff` command to compare between your output
-and the expected output.
+You can test whether your merge sort works using the `areStudentsSorted` function from HW5.
 
-The `diff` command: `diff $YOUR_OUTPUT $EXPECTED_OUTPUT` displays the differences between the
-two files line-by-line. When the two files are identical, `diff` will be silent.
+### 1. Testing your code 
+Note: This assignment builds on HW5, replacing `qsort` with your own sort,
+but otherwise leaving the rest of the assignment the same.
 
-Submission
-==========
+Thus, you can consider one of the following two options to test your code:
 
-You will only need to submit `eliminate.c` to Gradescope
+* **Option 1:** If your HW5 works fine, you can include your own `student.c` from HW5 here.
+**Three** minor things you need to modify if you choose to use your own `student.c` from HW5: 
+*first*, in the `sortStudents` function of your `student.c`, modify to call `msort` instead of `qsort`, the signature of `msort` is: `void msort(Student * base, int nel, int (*compar)(const void *, const void *))`; 
+*second*, remember to `#include "msort.h"` in your `student.c`; *third*, change from `#include "hw5.h"` to `#include "hw6.h"` in your `student.c`.
+Then, before testing the code, you can use the command `rm -rf student.o` to delete the pre-built object file `student.o` that is in the repository and use the Makefile (use the command `make TARGET_NAME`) to test the code with your own version of `student.c`.
 
-Grading
-==========
+* **Option 2:** If you were unable to complete your comparison functions for HW5, you may use the *pre-built* object file `student.o` that we provide in this repository.
+You can then link this file in your Makefile instead of compiling your 
+own versions of `student.c`. If you take this option *you will 
+have to develop your code on the ecegrid machines*.
 
-Grading contains four parts:
-- Files (5 pts): correct submission of `eliminate.c`.
-- Compile (5 pts): `make all` must succeed with the provided `main.c`.
-- Output (60 pts): 10 functional test cases.
-- Memory (30 pts): all test cases are re-run under valgrind and must show no errors or leaks.
+## Grading
+You will lose 1 point for every 1 byte of memory leak. In other words, if your program leaks 100 or more bytes, you will **receive zero**.
+We will grade HW6 using the same inputs (and expected outputs) as HW5.
+Do NOT remove the `#ifndef` directives around `merge` and `msort`. (Note that `#ifndef` works the opposite way to `#ifdef` -- if a particular flag is *not* defined, then the code in the `#ifndef` will be included).
 
-Passing a test means the program returns `EXIT_SUCCESS` and the output exactly matches the expected lines for that case.
-
-Memory test (valgrind)
-======================
-
-During grading, valgrind is used on all functional test cases. It reports:
-- Invalid reads/writes (out-of-bounds or after free)
-- Use of uninitialized values
-- Leaks (definitely lost/indirectly lost)
-
-Any reported errors or leaks will lose the memory points, even if the functional output is correct. Allocate carefully and `free` any memory you obtain (e.g., via `malloc`).
-
-Additional test cases
-===============================
-
-Beyond the three published examples in the handout, grading includes seven more hidden test cases with `n` and `k` values ranging roughly from 100 up to 100000. Runtime is not tightly constrained for this assignment (budget is more than 30 seconds per test case).
-
-Additional reading
-==================
-
-A mathematical question is to determine which element is left
-*without* counting 1, 2, ...  If you are interested in this topic,
-please read the book Concrete Mathematics by Ronald L. Graham, Donald
-E. Knuth, and Oren Patashnik.
-
-Is this a real problem? Is there any real application? Yes. In
-distributed systems (such as the Internet), sometimes different
-machines need to agree on something. For example, a group of machines
-want to find one representative for external communication. 
-
-History
-=======
-
-This problem is inspired by the "Josephus problem".  History (based on
-Wikipedia): Flavius Josephus and 40 soldiers were trapped in a cave by
-Roman soldiers. They chose suicide over capture, and decided the order
-is determined by the following method: they form a circle and set an
-integer k greater than one.  Then, the group starts with 1, 2, ... The
-person that counts k is eliminated.  The process continues until all
-are eliminated.  The question is where Josephus should stand at the
-beginning so that he is the last remaining person.
+## Submission
+Submit only the following files:
+1. `msort.c`
